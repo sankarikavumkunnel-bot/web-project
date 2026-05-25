@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>IEEE Events</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:#f5f5f7;
+            overflow-x:hidden;
+        }
+
+        /* NAVBAR */
+
+        .navbar{
+            width:90%;
+            margin:25px auto;
+            background:white;
+            border-radius:50px;
+            padding:18px 25px;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            gap:35px;
+
+            box-shadow:0 5px 20px rgba(0,0,0,0.08);
+
+            position:sticky;
+            top:20px;
+            z-index:1000;
+        }
+
+        .navbar a{
+            text-decoration:none;
+            color:#6b7280;
+            font-size:18px;
+            font-weight:700;
+            transition:0.4s;
+        }
+
+        .navbar a:hover{
+            color:#0077b6;
+        }
+
+        .navbar .active{
+            color:#0077b6;
+        }
+
+        /* HERO SECTION */
+
+        .hero{
+               min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            overflow: hidden;
+           /* min-height:100vh;
+
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+
+            text-align:center;
+
+            padding:40px 20px;
+
+            /* animation initial state */
+           /* opacity:0;
+            transform:translateY(-120px);
+            animation:slideIn 1.5s ease forwards;
+            transition:all 1.3s ease;
+            */
+        }
+
+        /* when visible */
+
+        /*.hero.active{
+            opacity:1;
+            transform:translateY(0);
+        }
+        */
+        /* MAIN TITLE */
+
+        .hero h1{
+              font-size: 80px;
+            line-height: 1.1;
+            color: #17233f;
+            font-weight: 900;
+            opacity: 0;
+            transform: translateX(-300px);
+            animation: slideLeft 1.5s ease forwards;
+        }
+
+        .hero h1 span{
+          color:#0077b6;
+        }
+
+        /* PARAGRAPH */
+
+        .hero p{
+           /* margin-top:40px;
+
+            max-width:850px;
+
+            font-size:32px;
+            line-height:1.6;
+
+            color:#6b7280;
+            */
+              margin-top: 35px;
+            max-width: 800px;
+            font-size: 24px;
+            line-height: 1.6;
+            color: #6b7280;
+            opacity: 0;
+            transform: translateX(300px);
+            animation: slideRight 1.5s ease forwards;
+            animation-delay: 0.5s;
+        }
+          /* SECOND PHRASE */
+        .hero .second-phrase {
+            margin-top: 50px;
+            font-size: 32px;
+            color: #17233f;
+            opacity: 0;
+            transform: translateX(-300px);
+            animation: slideLeftBlur 1.5s ease forwards;
+            animation-delay: 1s;
+            backdrop-filter: blur(5px);
+        }
+
+        /* KEYFRAMES FOR MAIN TITLE */
+
+        @keyframes slideLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-300px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* KEYFRAMES FOR PARAGRAPH */
+
+        @keyframes slideRight {
+            0% {
+                opacity: 0;
+                transform: translateX(300px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* KEYFRAMES FOR SECOND PHRASE WITH BLUR */
+
+        @keyframes slideLeftBlur {
+            0% {
+                opacity: 0;
+                transform: translateX(-300px);
+                filter: blur(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+                filter: blur(0px);
+            }
+        }
+        /* EXTRA SPACE FOR SCROLL */
+
+       /* .space{
+            height:100vh;
+        }
+        */
+       /* .scroll-container {
+            display: flex;
+            width: 300%;
+            overflow-x: scroll;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            scroll-padding: 0;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scroll-item {
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+        }
+        */
+        
+        /* MOBILE RESPONSIVE */
+
+        @media(max-width:768px){
+
+            .navbar{
+                gap:18px;
+                padding:16px 15px;
+            }
+
+            .navbar a{
+                font-size:14px;
+            }
+
+            .hero h1{
+                font-size:70px;
+            }
+
+            .hero p{
+                font-size:20px;
+            }
+            .second-phase{
+                font-size:24px;
+            }
+
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(80px);
+            transition: all 1s ease;
+        }
+
+        .reveal.active {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        /* Platform Layout Containers */
+        .section-container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        h2.section-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        /* Active Live Event State Component */
+        .events-empty-card {
+            background: var(--card-bg);
+            border: 1px dashed rgba(255,255,255,0.15);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .events-empty-card .counter {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent-orange);
+        }
+
+        /* Technical Curator Dashboard Elements */
+        .os-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .badge-pill {
+            background: rgba(0, 242, 254, 0.1);
+            color: var(--accent-cyan);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 30px;
+            position: relative;
+            transition: transform 0.3s, border 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--ieee-blue);
+        }
+
+        .icon-tag {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* Typography spacing definitions matching layout specifications */
+        .feature-card h3 {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .corn-icon {
+            font-size: 1.25rem;
+            filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.3));
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .analytics-meta {
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: var(--accent-orange);
+            display: flex;
+            gap: 15px;
+        }
+
+        .cta-link {
+            color: var(--accent-cyan);
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .cta-link::after {
+            content: " →";
+            margin-left: 5px;
+        }
+
+        /* Base Identity Footers */
+        footer {
+            background: #060911;
+            padding: 60px 20px 20px 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.9rem;
+            margin-top: 80px;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            padding-bottom: 40px;
+        }
+
+        .footer-logo-side h3 {
+            color: var(--accent-cyan);
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .footer-links-column h4 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .footer-links-column ul {
+            list-style: none;
+        }
+
+        .footer-links-column li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links-column a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+    <a href="index.html">HOME</a>
+    <a href="#" class="active">EVENTS</a>
+    <a href="societies.html">SOCIETIES</a>
+    <a href="execom.html">EXECOM</a>
+    <a href="signin.html">SIGN IN</a>
+       
+
+    </div>
+
+    <!-- SPACE BEFORE CONTENT -->
+
+    <div class="space"></div>
+
+    <!-- HERO CONTENT -->
+
+    <section class="hero" id="hero">
+
+        <h1>
+            Experience <br>
+            the <br>
+            <span>Extraordinary</span>
+        </h1>
+
+        <p>
+            Join the brightest minds at IEEE Kidangoor .
+            Explore our upcoming workshops, hackathons,
+            and symposiums designed to elevate your skills.
+        </p>
+
+   
+            <div class="second-phase">
+                Stay Inspired <br> and <br> Keep Learning
+                Our events are designed for innovation, networking, and growth. Be part of a global community of tech enthusiasts.
+            </div>
+     </section>
+    <section class="section-container">
+        <h2 class="section-title">Upcoming Events</h2>
+        <div class="events-empty-card">
+            <div class="counter">0</div>
+            <h3 style="margin: 10px 0;">No Upcoming Events</h3>
+            <p style="color: var(--text-muted);">Check back soon for exciting new events!</p>
+        </div>
+    </section>
+
+    <!-- Technical Curator Functional Features Interface Grid -->
+    <section class="section-container">
+        <div class="os-header">
+            <span class="badge-pill">Supercharged! 🔋</span>
+            <h2 style="font-size: 2.2rem; margin-top: 10px;">Technical Curator OS</h2>
+            <p style="color: var(--text-muted);">Next-generation event management for the modern engineer.</p>
+        </div>
+
+        <div class="grid-layout">
+            <!-- Card 1: Check In Routine -->
+            <div class="feature-card">
+                <div class="icon-tag">⚡️</div>
+                <span class="badge-pill" style="font-size:0.75rem;">Lightning fast!</span>
+                <h3>Instant Event Check-in <span class="corn-icon">🌽</span></h3>
+                <p>No more queues. Our lightning-fast QR system processes entries in under 0.5 seconds, integrated directly with your IEEE global ID.</p>
+                <a href="#" class="cta-link">Learn about Check-in</a>
+            </div>
+
+            <!-- Card 2: Interactive Matchmaking -->
+            <div class="feature-card">
+                <div class="icon-tag">🤝</div>
+                <span class="badge-pill" style="font-size:0.75rem;">Make friends!</span>
+                <h3>Networking Games <span class="corn-icon">🌽</span></h3>
+                <p>AI-powered icebreakers that match you with peers based on your technical interests.</p>
+                <a href="#" class="cta-link">Open Dashboard</a>
+            </div>
+
+   <div class="feature-card">
+    <h2>Live Event Analytics</h2>
+    <p>Real-time insights into attendee engagement, session popularity, and participation metrics—all at your fingertips.</p>
+    <span class="make-friends">  <ul>
+        <li>98% accuracy</li>
+        <li>Updated every 5s</li>
+    </ul></span>
+</div>
+
+<div class="section reveal">
+    <h2>Event OS</h2>
+    <p>Manage registrations, certificates, and feedback in a single unified dashboard.</p>
+    <button>Open Dashboard</button>
+</div>
+    <!-- EXTRA SPACE -->
+
+    
+
+    <script>
+
+        const hero = document.getElementById("hero");
+
+        window.addEventListener("scroll", () => {
+
+            const position = hero.getBoundingClientRect().top;
+
+            const screenPosition = window.innerHeight / 1.2;
+
+            if(position < screenPosition){
+
+                hero.classList.add("active");
+
+            }
+
+        });
+
+    </script>
+<script>
+  window.addEventListener('scroll', reveal);
+
+  function reveal() {
+    const reveals = document.querySelectorAll('.reveal');
+    for (let i = 0; i < reveals.length; i++) {
+      const windowHeight = window.innerHeight;
+      const revealTop = reveals[i].getBoundingClientRect().top;
+      const revealPoint = 100; // when to trigger (adjust as needed)
+
+      if (revealTop < windowHeight - revealPoint) {
+        reveals[i].classList.add('active');
+      }
+    }
+  }
+
+  reveal(); // run once on load to catch anything already in view
+</script>
+</body>
+
+</html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ieee-link.org</title>
+  <style>
+    /* Reset and General Layout */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Enlarged Medium Container with Split Design */
+    .carousel-container {
+      position: relative;
+      display: flex;
+      width: 160%;
+      max-width: 450px; /* Enlarged medium size */
+      height: 900px; /* Fixed uniform height */
+      background: #ffffff;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+   /* Master wrapping grid that structures the layout components */
+.grid-sandwich-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+/* Base style rules for the Top and Bottom structural panels */
+.grid-panel {
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #eaeaea;
+  box-sizing: border-box;
+}
+
+/* Ensuring inner text uses matching background colors and layout accents */
+.panel-inner-text {
+  padding: 30px 40px;
+  background: #fafafa;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.panel-inner-text h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #002147;
+  font-size: 1.5rem;
+}
+
+.panel-inner-text p {
+  margin: 0;
+  color: #4a5568;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Specific styling variants to ensure uniform grid item alignments */
+.top-span {
+  border-bottom: 3px solid #007bff; /* Color accent to emphasize top wrapper */
+}
+
+.middle-span {
+  margin-bottom: 0 !important; /* Overrides previous margin rules safely */
+}
+
+.bottom-span {
+  border-top: 3px solid #007bff; /* Color accent to emphasize bottom wrapper */
+}
+
+
+
+    /* Left Section: Visual Images (Takes 55% width) */
+    .visual-side {
+      position: relative;
+      width: 55%;
+      height: 100%;
+      background: #000;
+    }
+
+    .slide-img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      z-index: 1;
+    }
+
+    .slide-img.active {
+      opacity: 1;
+      z-index: 2;
+    }
+
+    /* Invisible Clickable Zones over the Image Side */
+    .zone {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 50%;
+      z-index: 10;
+      cursor: pointer;
+    }
+    .left-zone { left: 0; }
+    .right-zone { right: 0; }
+
+    /* Right Section: Bulleted Content (Takes 45% width) */
+    .content-side {
+      width: 45%;
+      height: 100%;
+      padding: 40px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: #fafafa;
+      border-left: 1px solid #eaeaea;
+    }
+
+    .slide-content {
+      display: none;
+    }
+
+    .slide-content.active {
+      display: block;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    .slide-content h2 {
+      margin-top: 0;
+      color: #002147; /* Professional Deep Blue */
+      font-size: 1.6rem;
+    }
+
+    .slide-content ul {
+      padding-left: 20px;
+      margin: 15px 0 0 0;
+    }
+
+    .slide-content li {
+      margin-bottom: 12px;
+      color: #4a5568;
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+
+    /* Navigation Elements */
+    .dots-container {
+      position: absolute;
+      bottom: 20px;
+      left: 40px; /* Aligned nicely inside the text side */
+      z-index: 20;
+    }
+
+    .dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin-right: 8px;
+      background-color: #cbd5e1;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .dot.active {
+      background-color: #007bff; /* Vibrant Blue accent */
+      width: 24px; /* Slight stretch effect for active dot */
+      border-radius: 5px;
+    }
+    .scroll-hint {
+      margin-top: 25px;
+      font-size: 0.9rem;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      animation: bounce 2s infinite;
+      cursor: pointer;
+    }
+
+    /* --- SECTION 2: MEMORABLE EVENTS & SOCIETIES --- */
+    .info-section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 80px 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      color: #002147;
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 4px;
+      background: #007bff;
+      margin: 12px auto 40px auto;
+      border-radius: 2px;
+    }
+
+    /* Grid Layout for Cards */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    /* Memorable Interactive Cards */
+    .custom-card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      border: 1px solid #e2e8f0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .custom-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0, 123, 255, 0.1);
+      border-color: #007bff;
+    }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+    }
+
+    .tag-event { background: #e0f2fe; color: #0369a1; }
+    .tag-society { background: #f0fdf4; color: #166534; }
+
+    .custom-card h3 {
+      margin: 0 0 12px 0;
+      color: #0f172a;
+      font-size: 1.3rem;
+    }
+
+    .custom-card p {
+      margin: 0;
+      color: #64748b;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .scroll-hint {
+      margin-top: 25px;
+      font-size: 0.9rem;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      animation: bounce 2s infinite;
+      cursor: pointer;
+    }
+
+    /* --- SECTION 2: MEMORABLE EVENTS & SOCIETIES --- */
+    .info-section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 80px 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      color: #002147;
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 4px;
+      background: #007bff;
+      margin: 12px auto 40px auto;
+      border-radius: 2px;
+    }
+
+    /* Grid Layout for Cards */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    /* Memorable Interactive Cards */
+    .custom-card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      border: 1px solid #e2e8f0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .custom-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0, 123, 255, 0.1);
+      border-color: #007bff;
+    }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+    }
+
+    .tag-event { background: #e0f2fe; color: #0369a1; }
+    .tag-society { background: #f0fdf4; color: #166534; }
+
+    .custom-card h3 {
+      margin: 0 0 12px 0;
+      color: #0f172a;
+      font-size: 1.3rem;
+    }
+
+    .custom-card p {
+      margin: 0;
+      color: #64748b;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Keyframe Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+   
+    
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-8px); }
+      60% { transform: translateY(-4px); }
+    }
+
+  
+  </style>
+</head>
+<body>
+  
+  <!-- THE ASYMMETRIC GRID CONTAINER -->
+<div class="grid-sandwich-wrapper">
+
+  <!-- 1. TOP ROW CONTAINER -->
+  <div class="grid-panel top-span">
+    <div class="panel-inner-text">
+      <h2>Initial Phase Requirements</h2>
+      <p>Analyze the initial structural metrics, coordinate regional team targets, and configure baseline technology systems before scaling up main projects.</p>
+    </div>
+  </div>
+
+  <!-- 2. THE MIDDLE CAROUSEL CONTAINER (THE FILLING) -->
+  <
+      <div class="slide-content">
+        <h2>Innovate for Global Standards</h2>
+        <ul>
+          <li>Gain full access to top-tier digital library databases and research portals.</li>
+          <li>Publish engineering breakthroughs in globally recognized peer journals.</li>
+          <li>Adopt modern software engineering and electrical standard specifications.</li>
+        </ul>
+      </div>
+
+      <div class="slide-content">
+        <h2>Accelerate Career Pathways</h2>
+        <ul>
+          <li>Secure premium global tech mentorship from high-impact industry leaders.</li>
+          <li>Unlock entry paths to international design hackathons and events.</li>
+          <li>Receive verified professional execution credentials and references.</li>
+        </ul>
+      </div>
+    
+  <!-- 3. BOTTOM ROW CONTAINER -->
+  <div class="grid-panel bottom-span">
+    <div class="panel-inner-text">
+      <h2>Future Optimization Strategy</h2>
+      <p>Review systemic outputs across all networks, package deployment archives, and finalize long-term community educational modules.</p>
+    </div>
+  </div>
+
+</div>
+
+  <div class="carousel-container">
+    
+    <!-- LEFT SIDE: Image Slides & Click Zones -->
+    <div class="visual-side">
+      <img class="slide-img active" src="../web/p1.png" alt="Slide 1">
+      <img class="slide-img" src="../web/p2.png" alt="Slide 2">
+      <img class="slide-img" src="../web/p3.png" alt="Slide 3">
+      
+      <!-- Click left side to go back, right side to go forward -->
+      <div class="zone left-zone" onclick="changeSlide(1)"></div>
+      <div class="zone right-zone" onclick="changeSlide(1)"></div>
+    </div>
+    
+    <!-- RIGHT SIDE: Changing Bullet Content -->
+    <div class="content-side">
+      
+      <!-- Content 1 -->
+      <div class="slide-content active">
+        <h2>Belong Where Leaders Thrive</h2>
+        <ul>
+          <li>Access premier networking opportunities with IEEE Kerala Section experts.</li>
+          <li>Engage in leadership training frameworks designed for engineering students.</li>
+          <li>Collaborate on localized technology projects driving regional impact.</li>
+        </ul>
+      </div>
+
+      <!-- Content 2 -->
+      <div class="slide-content active">
+        <h2>Connect With Innovators</h2>
+        <ul>
+          <li>Join hands with cross-functional technical teams globally.</li>
+          <li>Participate in exclusive hackathons and research symposiums.</li>
+          <li>Gain mentorship access from distinguished industry professionals.</li>
+        </ul>
+      </div>
+
+      <!-- Content 3 -->
+      <div class="slide-content active">
+        <h2>Build Your Future Today</h2>
+        <ul>
+          <li>Unlock dynamic career pathways through certified skill programs.</li>
+          <li>Publish research work via internationally recognized IEEE platforms.</li>
+          <li>Earn awards and honors recognizing exceptional volunteer excellence.</li>
+        </ul>
+      </div>
+
+      <!-- Navigation Indicators inside content zone -->
+      
+
+    </div>
+
+  </div>
+    <div class="scroll-hint" onclick="document.getElementById('explore-ieee').scrollIntoView();">
+      Scroll Down To Explore ↓
+    </div>
+</div>
+<!-- PAGE WRAPPER 2: SCROLLABLE EVENTS & SOCIETIES EXPLORER -->
+  <div id="explore-ieee" class="info-section">
+    
+    <!-- Flagship Events Layout -->
+    <h2 class="section-title">Flagship IEEE Events</h2>
+    <div class="card-grid">
+      
+      <div class="custom-card">
+        <span class="card-tag tag-event">Annual Technical Fest</span>
+        <h3>TechNexus</h3>
+        <p>A high-energy annual gathering uniting developers, student researchers, and keynote thinkers to showcase hardware prototypes, tackle hackathons, and build web ecosystems.</p>
+      </div>
+
+      <div class="custom-card">
+        <span class="card-tag tag-event">Leadership Summit</span>
+        <h3>LinkForward</h3>
+        <p>A flagship leadership program explicitly designed to hone managerial, organizational, and technical project-execution traits within standout engineering volunteers.</p>
+      </div>
+
+      <div class="custom-card">
+        <span class="card-tag tag-event">Global Project Drive</span>
+        <h3>SIGHT Initiatives</h3>
+        <p>Humanitarian tech camps focused on deploying localized engineering modifications to address power, clean water resources, and safety problems in regional environments.</p>
+      </div>
+
+    </div>
+
+    <!-- Societies Layout -->
+    <h2 class="section-title">Connected Technical Societies</h2>
+    <div class="card-grid">
+      
+      <div class="custom-card">
+        <span class="card-tag tag-society">Computing & AI</span>
+        <h3>Computer Society (CS)</h3>
+        <p>The core community for algorithms, architecture engineering, and intelligent systems. Hosts specialized tracks covering artificial intelligence and cybersecurity models.</p>
+      </div>
+
+      <div class="custom-card">
+        <span class="card-tag tag-society">Robotics & Signals</span>
+        <h3>RAS & SPS</h3>
+        <p>Combining the Robotics & Automation Society with Signal Processing groups to design autonomous drone behaviors, smart automation rigs, and real-time sensory math systems.</p>
+      </div>
+
+      <div class="custom-card">
+        <span class="card-tag tag-society">Power & Management</span>
+        <h3>PES & TEMS</h3>
+        <p>Driving sustainable energy solutions through the Power & Energy Society while learning executive team deployment through the Technology Engineering Management Society.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- JavaScript Management -->
+  
+  <script>
+    let slideIndex = 0;
+    const images = document.querySelectorAll('.slide-img');
+    const contents = document.querySelectorAll('.slide-content');
+    const dots = document.querySelectorAll('.dot');
+
+    function showSlide(index) {
+      if (index >= images.length) slideIndex = 0;
+      if (index < 0) slideIndex = images.length - 1;
+
+      // Reset all components
+      images.forEach(img => img.classList.remove('active'));
+      contents.forEach(cnt => cnt.classList.remove('active'));
+      dots.forEach(dot => dot.classList.remove('active'));
+
+      // Apply active states to matching index
+      images[slideIndex].classList.add('active');
+      contents[slideIndex].classList.add('active');
+      dots[slideIndex].classList.add('active');
+    }
+
+    function changeSlide(direction) {
+      slideIndex += direction;
+      showSlide(slideIndex);
+    }
+
+    function currentSlide(index) {
+      slideIndex = index;
+      showSlide(slideIndex);
+    }
+  </script>
+
+</body>
+</html>

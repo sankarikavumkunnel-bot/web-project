@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College of Engineering, Kidangoor (CEK) 2026 Pop-up</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: rgba(15, 23, 42, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        /* Modal Overlay Wrapper Container */
+        .modal-container {
+            background: linear-gradient(180deg, #102A6B 0%, #061233 100%);
+            width: 100%;
+            max-width: 420px;
+            border-radius: 24px;
+            padding: 40px 28px 32px 28px;
+            text-align: center;
+            color: #ffffff;
+            position: relative;
+            box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Close Window Trigger Button */
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Top Brand Graphic Circle */
+        .icon-badge {
+            background: rgba(255, 255, 255, 0.12);
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            margin: 0 auto 24px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-badge svg {
+            width: 38px;
+            height: 38px;
+            fill: #ffffff;
+        }
+
+        /* Headings & Text */
+        h1 {
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        p {
+            font-size: 14.5px;
+            line-height: 1.6;
+            color: #d1dcfa;
+            margin-bottom: 32px;
+            padding: 0 8px;
+        }
+
+        /* Call To Actions */
+        .btn-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #ffffff;
+            color: #061233;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #f3f4f6;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 13.5px;
+            width: 100%;
+            margin-bottom: 28px;
+            transition: background 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .tag-new {
+            background-color: #e53e3e;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .dismiss-link {
+            display: inline-block;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .dismiss-link:hover {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="modal-container" id="admissionsModal">
+        <!-- Close Button -->
+        <button class="close-btn" onclick="document.getElementById('admissionsModal').style.display='none'">&times;</button>
+        
+        <!-- Graduation Icon -->
+        <div class="icon-badge">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5.18 11.59l6.82 3.72 6.82-3.72H5.18zM12 18c-2.3 0-4.36-1.12-5.66-2.87l-1.59 1.2A8.96 8.96 0 0012 20c3.12 0 5.9-1.6 7.49-4.03l-1.65-1.14C16.49 16.76 14.38 18 12 18z"/>
+            </svg>
+        </div>
+
+        <!-- Heading Text -->
+        <h1>Admissions Open</h1>
+        <p>Apply now and be part of one of the best engineering colleges in Kerala.</p>
+
+        <!-- Main Action: Admission Portal -->
+        <a href="https://ce-kgr.org/admission.php" class="btn-primary" target="_blank">
+            Apply Now <span>&rarr;</span>
+        </a>
+
+        <!-- Secondary Action: Scholarship (Includes literal website spelling typo) -->
+        <a href="https://collegedunia.com/college/28542-college-of-engineering-cek-kidangoor-kottayam/scholarship" class="btn-secondary" target="_blank">
+            scolership results are out <span class="tag-new">New</span>
+        </a>
+
+        <div>
+            <!-- Dismiss action -->
+            <a href="#" class="dismiss-link" onclick="document.getElementById('admissionsModal').style.display='none'; return false;">Maybe later</a>
+        </div>
+    </div>
+
+</body>
+</html>

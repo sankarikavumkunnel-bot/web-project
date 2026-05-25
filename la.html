@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IEEE Student Membership Benefits</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .benefits-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-top: 6px solid #00629b; /* IEEE Brand Blue */
+        }
+
+        h2 {
+            color: #002855;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .benefits-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .benefits-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            font-size: 15px;
+            color: #444;
+        }
+
+        /* Custom checkmark or bullet icon anchor */
+        .benefits-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 5px;
+            top: 0;
+            color: #00629b;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .benefits-list li.highlight-item {
+            font-weight: bold;
+            color: #002855;
+            list-style-type: none;
+            padding-left: 30px;
+        }
+        
+        .benefits-list li.highlight-item::before {
+            content: "✦";
+            color: #ff6b35;
+        }
+
+        .note-box {
+            background-color: #fdf8e2;
+            border-left: 4px solid #f39c12;
+            padding: 20px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #66512c;
+        }
+
+        .note-box strong {
+            color: #b7791f;
+            display: block;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="benefits-card">
+        <h2>Membership Benefits</h2>
+        <p class="subtitle">As a Student/Graduate Student Member of IEEE you:</p>
+
+        <ul class="benefits-list">
+            <li>Join a community of over 420,000 technology and engineering professionals united by a common desire to continuously learn, interact, collaborate, and innovate.</li>
+            <li>Get the resources and opportunities you need to keep on top of changes in technology.</li>
+            <li>Get involved in standards development.</li>
+            <li>Network with other professionals in your local area or within a specific technical interest.</li>
+            <li>Are mentored by professional engineers and technologists.</li>
+            <li>Obtain access to the largest library of electrical engineering, computer science, and electronics technical literature as well as the latest technology trends, industry news, and events.</li>
+            <li>Collaborate with IEEE colleagues and member groups, online or in person, to build a support group for your profession, industry, or project.</li>
+            <li class="highlight-item">And so much more!</li>
+        </ul>
+
+        <div class="note-box">
+            <strong>Important Enrollment Note:</strong>
+            A Student/Graduate Student member must carry at least 50% of a normal full-time academic program as a registered undergraduate or graduate student in a regular course of study in IEEE designated fields. The total cumulative period for a member to hold the Student member grade and/or the Graduate Student member grade is limited to eight years.
+        </div>
+    </div>
+
+</body>
+</html>

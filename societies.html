@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Your Society</title>
+    <style>
+        /* General Page Layout */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #002855;
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            font-size: 1rem;
+            letter-spacing: 4px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        /* 2-Column Responsive Grid Grid Layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            max-width: 750px;
+            width: 100%;
+        }
+
+        /* Adjusts layout to single column on mobile screens */
+        @media (max-width: 600px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Card Container Design */
+        .card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 35px 20px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 200px;
+            box-sizing: border-box;
+        }
+
+        /* Interactive Hover Effect */
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* SVG Logo Styling */
+        .logo-box {
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .logo-box svg {
+            max-width: 85%;
+            max-height: 100%;
+        }
+
+        /* Title inside the card */
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin: 0;
+        }
+        .societies-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 16px;
+  background-color: #f8f9fa;
+}
+
+/* Rounded, Shadowed Cards */
+.society-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+  min-height: 200px;
+}
+
+/* Container to handle logos cleanly */
+.logo-wrapper {
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.logo-wrapper img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* Card Titles */
+.society-card h3 {
+  font-family: sans-serif;
+  font-size: 14px;
+  color: #212529;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.4;
+}
+.navbar {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 70px;
+    background: white;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    z-index: 1000;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #666;
+    font-weight: 600;
+    font-size: 16px;
+    transition: 0.3s ease;
+    padding: 10px 18px;
+    border-radius: 20px;
+}
+
+.navbar a:hover {
+    background: #0077b6;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.navbar a.active {
+    background: #0077b6;
+    color: white;
+}
+
+
+    </style>
+</head>
+<body>
+     <!-- PERSISTENT TOP NAVIGATION -->
+    <div class="navbar">
+        <a href="index.html" >HOME</a>
+        <a href="events.html">EVENTS</a>
+        <a href="societies.html" class="active">SOCIETIES</a>
+        <a href="execom.html">EXECOM</a>
+        <a href="signin.html">SIGN IN</a>
+    </div>
+    <h1>SELECT YOUR SOCIETY</h1>
+    <div class="subtitle">Choose Your Path</div>
+
+    <div class="grid-container">
+        <!-- Card 1: Computer Society -->
+        <div class="card" onclick="navigateTo('https://computer.org')">
+            <div class="logo-box">
+                <!-- Inline SVG graphic representing the CS Logo -->
+                <svg viewBox="0 0 200 70" xmlns="http://w3.org">
+                    <circle cx="30" cy="35" r="22" fill="none" stroke="#e67e22" stroke-width="4"/>
+                    <path d="M22,25 L38,25 M22,35 L38,35 M22,45 L38,45 M30,15 L30,55" stroke="#e67e22" stroke-width="3"/>
+                    <text x="65" y="32" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#000">IEEE</text>
+                    <text x="65" y="46" font-family="Arial, sans-serif" font-size="14" font-weight="900" fill="#000">COMPUTER</text>
+                    <text x="65" y="58" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#000">SOCIETY</text>
+                </svg>
+            </div>
+            <p class="card-title">Computer Society</p>
+        </div>
+
+        <!-- Card 2: Robotics & Automation Society -->
+        <div class="card" onclick="navigateTo('https://ieee-ras.org')">
+            <div class="logo-box">
+                <!-- Inline SVG graphic representing the RAS Logo -->
+                <svg viewBox="0 0 200 70" xmlns="http://w3.org">
+                    <path d="M20,50 Q15,20 35,20 Q55,20 40,40 Q55,50 35,50" fill="none" stroke="#781d7d" stroke-width="6" stroke-linecap="round"/>
+                    <circle cx="43" cy="28" r="4" fill="#781d7d" />
+                    <text x="70" y="28" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#781d7d">IEEE</text>
+                    <text x="70" y="42" font-family="Arial, sans-serif" font-size="13" font-weight="900" fill="#9e1b4a">Robotics &</text>
+                    <text x="70" y="54" font-family="Arial, sans-serif" font-size="13" font-weight="900" fill="#9e1b4a">Automation</text>
+                    <text x="70" y="64" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#781d7d">Society</text>
+                </svg>
+            </div>
+            <p class="card-title">Robotics & Automation Society</p>
+        </div>
+
+        <!-- Card 3: Women in Engineering -->
+        <div class="card" onclick="navigateTo('https://wie.ieee.org')">
+            <div class="logo-box">
+                <!-- Inline SVG graphic representing the WIE Logo -->
+                <svg viewBox="0 0 200 70" xmlns="http://w3.org">
+                    <text x="15" y="48" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#777" transform="rotate(-90 15 48)">IEEE</text>
+                    <text x="30" y="50" font-family="'Brush Script MT', cursive, sans-serif" font-size="42" font-weight="bold" fill="#702082">Wie</text>
+                    <text x="32" y="18" font-family="Arial, sans-serif" font-size="9" font-weight="600" fill="#702082">Women in Engineering</text>
+                </svg>
+            </div>
+            <p class="card-title">Women in Engineering</p>
+        </div>
+
+        <!-- Card 4: Industry Applications Society -->
+        <div class="card" onclick="navigateTo('https://ias.ieee.org')">
+            <div class="logo-box">
+                <!-- Inline SVG graphic representing the IAS Logo -->
+                <svg viewBox="0 0 200 70" xmlns="http://w3.org">
+                    <path d="M40,50 L55,15 L70,50 M46,38 L64,38" fill="none" stroke="#008450" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <text x="15" y="32" font-family="Arial, sans-serif" font-size="14" font-weight="900" fill="#008450">IAS</text>
+                    <text x="15" y="44" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#000">IEEE INDUSTRY</text>
+                    <text x="15" y="51" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#000">APPLICATIONS</text>
+                    <text x="15" y="58" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#000">SOCIETY</text>
+                    <text x="78" y="36" font-family="Arial, sans-serif" font-size="10" fill="#000">Linking</text>
+                    <text x="78" y="46" font-family="Arial, sans-serif" font-size="10" fill="#000">Research</text>
+                    <text x="78" y="56" font-family="Arial, sans-serif" font-size="10" fill="#000">to Practice</text>
+                </svg>
+            </div>
+            <p class="card-title">Industry Applications Society</p>
+        </div>
+    
+    <div class="card" onclick="navigateTo('https:// ieee-pes.org')"></div>
+    <div class="logo-box">
+        <!-- Inline SVG graphic representing the PES Logo -->
+        <svg viewBox="0 0 200 70" xmlns="http://www.w3.org/2000/svg">
+            <path d="M42,20 L58,20 L50,38 Z M38,48 L52,48 L66,16 L48,16 Z" fill="#006699" stroke="#006699" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="15" y="32" font-family="Arial, sans-serif" font-size="14" font-weight="900" fill="#006699">PES</text>
+            <text x="15" y="44" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#000">IEEE POWER</text>
+            <text x="15" y="51" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#000">&amp; ENERGY</text>
+            <text x="15" y="58" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#000">SOCIETY</text>
+            <text x="78" y="36" font-family="Arial, sans-serif" font-size="10" fill="#000">Powering</text>
+            <text x="78" y="46" font-family="Arial, sans-serif" font-size="10" fill="#000">The Future</text>
+            <text x="78" y="56" font-family="Arial, sans-serif" font-size="10" fill="#000">Sustainably</text>
+        </svg>
+    </div>
+    <p class="card-title">Power & Energy Society</p>
+</div>
+
+
+  <!-- 2. SIGHT -->
+  <div class="card" onclick="navigateTo('https:// sight.ieee.org')">
+    <div class="logo-box">
+        <!-- Inline SVG graphic representing the SIGHT Logo -->
+        <svg viewBox="0 0 200 70" xmlns="http://w3.org">
+            <!-- Global / Humanitarian Connection Paths -->
+            <circle cx="55" cy="35" r="14" fill="none" stroke="#007377" stroke-width="3"/>
+            <path d="M41,35 L69,35 M55,21 L55,49" fill="none" stroke="#E5A93C" stroke-width="2.5" stroke-linecap="round"/>
+            <text x="15" y="32" font-family="Arial, sans-serif" font-size="14" font-weight="900" fill="#007377">SIGHT</text>
+            <text x="15" y="44" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#000">IEEE SPECIAL</text>
+            <text x="15" y="51" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#000">INTEREST GROUP</text>
+            <text x="15" y="58" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#000">ON TECH</text>
+            <text x="78" y="36" font-family="Arial, sans-serif" font-size="10" fill="#000">Humanitarian</text>
+            <text x="78" y="46" font-family="Arial, sans-serif" font-size="10" fill="#000">Technology</text>
+            <text x="78" y="56" font-family="Arial, sans-serif" font-size="10" fill="#000">Activities</text>
+        </svg>
+    </div>
+    <p class="card-title">Humanitarian Technology (SIGHT)</p>
+</div>
+
+  <!-- 3. Engineering in Medicine & Biology -->
+ <div class="card" onclick="navigateTo('https://embs.org')">
+    <div class="logo-box">
+        <!-- Inline SVG graphic representing the EMBS Logo -->
+        <svg viewBox="0 0 200 70" xmlns="http://w3.org">
+            <!-- DNA Helix & Heartbeat Vitality Signal Lines -->
+            <path d="M36,25 Q46,12 55,35 T74,45" fill="none" stroke="#4A154B" stroke-width="3" stroke-linecap="round"/>
+            <path d="M36,45 Q46,58 55,35 T74,25" fill="none" stroke="#006699" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Medical ECG Pulse Peak Spike Intersecting the Center -->
+            <path d="M48,35 L52,35 L55,16 L59,54 L62,35 L67,35" fill="none" stroke="#006699" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="15" y="32" font-family="Arial, sans-serif" font-size="14" font-weight="900" fill="#4A154B">EMBS</text>
+            <text x="15" y="44" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#000">IEEE ENGINEERING</text>
+            <text x="15" y="51" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#000">IN MEDICINE &amp;</text>
+            <text x="15" y="58" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#000">BIOLOGY SOCIETY</text>
+            <text x="78" y="36" font-family="Arial, sans-serif" font-size="10" fill="#000">Where</text>
+            <text x="78" y="46" font-family="Arial, sans-serif" font-size="10" fill="#000">Technology</text>
+            <text x="78" y="56" font-family="Arial, sans-serif" font-size="10" fill="#000">Meets Medicine</text>
+        </svg>
+    </div>
+    <p class="card-title">Engineering in Medicine &amp; Biology</p>
+</div>
+
+
+  <!-- 4. Signal Processing Society -->
+   <div class="card" onclick="navigateTo('https://signalprocessingsociety.org')">
+    <div class="logo-box">
+        <!-- Inline SVG graphic representing the SPS Logo -->
+        <svg viewBox="0 0 200 70" xmlns="http://w3.org">
+            <!-- Digital Signal Sampling / Frequency Wave Path -->
+            <path d="M38,45 L38,35 M43,48 L43,28 M48,50 L48,20 M53,46 L53,25 M58,44 L58,32 M63,48 L63,22 M68,45 L68,35" fill="none" stroke="#990033" stroke-width="3" stroke-linecap="round"/>
+            <path d="M35,35 Q48,15 53,35 T70,35" fill="none" stroke="#E5A93C" stroke-width="2" stroke-dasharray="2,2"/>
+            <text x="15" y="32" font-family="Arial, sans-serif" font-size="14" font-weight="900" fill="#990033">SPS</text>
+            <text x="15" y="44" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#000">IEEE SIGNAL</text>
+            <text x="15" y="51" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#000">PROCESSING</text>
+            <text x="15" y="58" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#000">SOCIETY</text>
+            <text x="78" y="36" font-family="Arial, sans-serif" font-size="10" fill="#000">The Science</text>
+            <text x="78" y="46" font-family="Arial, sans-serif" font-size="10" fill="#000">of Digital</text>
+            <text x="78" y="56" font-family="Arial, sans-serif" font-size="10" fill="#000">Innovation</text>
+        </svg>
+    </div>
+    <p class="card-title">Signal Processing Society</p>
+</div>
+
+ 
+
+  <!-- 5. Circuits and Systems Society -->
+ <div class="card" onclick="navigateTo('https://ieee-cas.org')">
+    <div class="logo-box">
+        <!-- Inline SVG graphic representing the CAS Logo -->
+        <svg viewBox="0 0 200 70" xmlns="http://w3.org">
+            <!-- Integrated Circuit Nodes & Wave Tracking Paths -->
+            <path d="M38,42 L46,42 L52,22 L58,48 L64,35 L72,35" fill="none" stroke="#008542" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="46" cy="42" r="2.5" fill="#E5A93C"/>
+            <circle cx="64" cy="35" r="2.5" fill="#E5A93C"/>
+            <text x="15" y="32" font-family="Arial, sans-serif" font-size="14" font-weight="900" fill="#008542">CAS</text>
+            <text x="15" y="44" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#000">IEEE CIRCUITS</text>
+            <text x="15" y="51" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#000">&amp; SYSTEMS</text>
+            <text x="15" y="58" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#000">SOCIETY</text>
+            <text x="78" y="36" font-family="Arial, sans-serif" font-size="10" fill="#000">Theory,</text>
+            <text x="78" y="46" font-family="Arial, sans-serif" font-size="10" fill="#000">Analysis and</text>
+            <text x="78" y="56" font-family="Arial, sans-serif" font-size="10" fill="#000">Design</text>
+        </svg>
+    </div>
+    <p class="card-title">Circuits &amp; Systems Society</p>
+</div>
+
+
+  <!-- 6. Control Systems Society (FIXED DATA) -->
+  <div class="card" onclick="navigateTo('https://ieeecss.org')">
+    <div class="logo-box">
+        <!-- Inline SVG graphic representing the CSS Logo -->
+        <svg viewBox="0 0 200 70" xmlns="http://w3.org">
+            <!-- Closed-Loop Feedback Control Diagram Paths -->
+            <rect x="48" y="22" width="18" height="14" fill="none" stroke="#003366" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M36,29 L48,29 M66,29 L74,29 L74,50 L42,50 L42,35" fill="none" stroke="#003366" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <polygon points="42,29 38,32 38,26" fill="#003366"/>
+            <text x="15" y="32" font-family="Arial, sans-serif" font-size="14" font-weight="900" fill="#003366">CSS</text>
+            <text x="15" y="44" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#000">IEEE CONTROL</text>
+            <text x="15" y="51" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#000">SYSTEMS</text>
+            <text x="15" y="58" font-family="Arial, sans-serif" font-size="7" font-weight="bold" fill="#000">SOCIETY</text>
+            <text x="78" y="36" font-family="Arial, sans-serif" font-size="10" fill="#000">Theory and</text>
+            <text x="78" y="46" font-family="Arial, sans-serif" font-size="10" fill="#000">Application</text>
+            <text x="78" y="56" font-family="Arial, sans-serif" font-size="10" fill="#000">of Control</text>
+        </svg>
+    </div>
+    <p class="card-title">Control Systems Society</p>
+</div>
+</div>
+</div>
+    <script>
+        // Redirects user to target website destination
+        function navigateTo(url) {
+            window.location.href = url;
+        }
+    </script>
+
+</body>
+</html>

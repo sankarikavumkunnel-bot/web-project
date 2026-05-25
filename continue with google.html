@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in - Google Accounts</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            background-color: #ffffff;
+            color: #1f1f1f;
+            padding: 24px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 448px;
+            margin-top: 20px;
+        }
+
+        .google-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #3c4043;
+            margin-bottom: 40px;
+        }
+
+        .google-logo svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 400;
+            line-height: 44px;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #1f1f1f;
+            margin-bottom: 40px;
+        }
+
+        .subtitle a {
+            color: #0b57d0;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .subtitle a:hover {
+            text-decoration: underline;
+        }
+        /* Wrap content area to fade out nicely during loading */
+        .content-fade {
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        .content-fade.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .account-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            width:100%;
+            border-bottom: 1px solid #e3e3e3;
+            margin-bottom: 20px;
+        }
+        .google-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #3c4043;
+            margin-bottom: 40px;
+        }
+
+        .google-header svg {
+            width: 24px;
+            height: 24px;
+        }
+
+.account-btn {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 16px 4px;
+            background: none;
+            border: none;
+            border-top: 1px solid #e3e3e3;
+            text-align: left;
+            cursor: pointer;
+            transition: background-color 0.15s ease;
+        }
+
+        /* Hover Feedback */
+        .account-btn:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* Active Click Feedback */
+        .account-btn:active {
+            background-color: #f1f3f4;
+        }
+
+        /* Focus Ring for Accessibility */
+        .account-btn:focus-visible {
+            outline: 2px solid #0b57d0;
+            outline-offset: -2px;
+        }
+
+
+        /*.account-item {
+            display: flex;
+            align-items: center;
+            padding: 16px 0;
+            border-top: 1px solid #e3e3e3;
+            cursor: pointer;
+        }
+        */
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+            font-weight: 500;
+            overflow: hidden;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .avatar.purple {
+            background-color: #673ab7;
+        }
+
+        .account-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .account-name {
+            font-size: 16px;
+            font-weight: 500;
+            color: #1f1f1f;
+            line-height: 24px;
+        }
+
+        .account-email {
+            font-size: 14px;
+            color: #5e5e5e;
+            line-height: 20px;
+        }
+
+        .use-another {
+            display: flex;
+            align-items: center;
+            padding: 16px 0;
+            cursor: pointer;
+            color: #1f1f1f;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .use-another-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .loading-overlay {
+            position: absolute;
+            top: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+        }
+
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #0b57d0;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .footer {
+            margin-top: auto;
+            width: 100%;
+            max-width: 448px;
+            padding: 20px 0;
+            display: flex;
+            justify-content: flex-start;
+        }
+        .language-dropdown {
+            font-size: 12px;
+            color: #5e5e5e;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            padding: 4px 16px 4px 0;
+            appearance: none; /* Hide default native browser arrow */
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://w3.org' width='8' height='8' viewBox='0 0 24 24' fill='%235e5e5e'><path d='M7 10l5 5 5-5z'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right center;
+        }
+
+        .language-dropdown:focus-visible {
+            outline: 1px solid #0b57d0;
+            border-radius: 2px;
+        }
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .modal-backdrop.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-box {
+            background-color: #ffffff;
+            width: 90%;
+            max-width: 340px;
+            padding: 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            transform: scale(0.9);
+            transition: transform 0.2s ease;
+        }
+
+        .modal-backdrop.show .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 16px;
+            color: #1f1f1f;
+        }
+
+        .modal-body {
+            font-size: 14px;
+            color: #5e5e5e;
+            line-height: 20px;
+            margin-bottom: 24px;
+        }
+
+        .modal-field {
+            margin-bottom: 12px;
+        }
+
+        .modal-label {
+            font-weight: 500;
+            color: #1f1f1f;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* Got It Button Styling */
+        .modal-btn {
+            display: block;
+            margin-left: auto;
+            background-color: #0b57d0;
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.15s;
+        }
+
+        .modal-btn:hover { background-color: #0a4ebd; }
+        .modal-btn:active { background-color: #0842a0; }
+
+       /* .language-selector {
+            font-size: 12px;
+            color: #5e5e5e;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+       
+        .language-selector::after {
+            content: "▼";
+            font-size: 8px;
+            margin-left: 4px;
+        }
+       */   
+       /* Inline Link Style */
+.subtitle-link {
+  color: #007bff;
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+}
+.subtitle-link:hover {
+  color: #0056b3;
+}
+
+/* Modal Popup Background Overlay */
+.custom-modal {
+  display: none; 
+  position: fixed; 
+  z-index: 9999; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(0, 0, 0, 0.5); 
+}
+
+/* Small Information Box Layout */
+.modal-content {
+  background-color: #ffffff;
+  margin: 15% auto; 
+  padding: 25px 20px;
+  border-radius: 8px;
+  width: 300px; 
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  position: relative;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.modal-content h3 {
+  margin-top: 5px;
+  font-size: 18px;
+  color: #111;
+}
+
+.modal-content p {
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+/* Close Button (X) */
+.close-btn {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 22px;
+  cursor: pointer;
+  color: #aaa;
+}
+.close-btn:hover {
+  color: #000;
+}
+
+/* Highlighted Footer Area & Button */
+.modal-footer {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.footer-action-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: bold;
+}
+.footer-action-btn:hover {
+  background-color: #0056b3;
+}
+  
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Google Header -->
+        <div class="google-logo">
+            <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://w3.org">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+            </svg>
+            Sign in with Google
+        </div>
+
+        <!-- Main Heading -->
+        <div id="form-content" class="content-fade">
+        <h1>Choose an account</h1>
+        <p class="modal-description"> 
+  Continue to <a href="#" id="ieee-trigger" class="subtitle-link">IEEE Kidangoor</a>.
+</p>
+
+<!-- The Small Popup Info Box -->
+<div id="infoModal" class="custom-modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    
+    <!-- Developer & App Info -->
+    <h3 class="app-name">Society Manager App</h3>
+    <p class="dev-info">Developed by: <strong>IEEE Sharda Team</strong></p>
+    <p class="support-email">Support: <a href="mailto:support@ieeesharda.org">support@ieeekidangoor.org</a></p>
+    
+    <!-- Highlighted Footer Action Button -->
+    <div class="modal-footer">
+      <button id="go-it-btn">Got it</button>
+    </div>
+  </div>
+</div>
+
+
+        <!-- Account Selection List -->
+        <ul class="account-list">
+            <!-- Account 1 -->
+            <li class="account-item">
+              <button class="account-btn" type="button" onclick="window.location.href='signin google.html';">
+                <div class="avatar purple">B</div>
+                   
+                <div class="account-info">
+                    <span class="account-name">B Darshan</span>
+                    <span class="account-email">devilq23@gmail.com</span>
+                </div>
+              </button>
+            </li>
+            
+            <!-- Account 2 -->
+            <li class="account-item">
+                  <button class="account-btn" type="button" onclick="window.location.href='signin google2.html';">
+                <div class="avatar purple">A</div>
+                <div class="account-info">
+                    <span class="account-name">Ankith B</span>
+                    <span class="account-email">anki8*&%@12s@gmail.com</span>
+                </div>
+                  </button>
+            </li>
+
+            <!-- Use Another Account Option -->
+            <li class="use-another">
+                  <button class="account-btn" type="button"  onclick="window.location.href='useanother.html';">
+                <div class="use-another-icon">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="#1f1f1f">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                    </svg>
+                </div>
+                Use another account
+                  </button>
+            </li>
+        </ul>
+    </div>
+    <div id="loading-screen" class="loading-overlay">
+            <div class="spinner"></div>
+        </div>
+    </div>
+    <!-- Footer Language Settings -->
+    <div class="footer">
+      <select class="language-dropdown" onchange="console.log('Language changed to: ' + this.value)">
+            <option value="en-gb" selected>English (United Kingdom)</option>
+            <option value="en-us">English (United States)</option>
+            <option value="en-in">English (India)</option>
+            <option value="ml-in">Malayalam (മലയാളം)</option>
+            <option value="hi-in">Hindi (हिन्दी)</option>
+            <option value="es-es">Español (España)</option>
+            <option value="fr-fr">Français (France)</option>
+        </select>
+  
+       
+    </div>
+    <script>
+        function handleAccountSelect(user) {
+            // 1. Hide the active text menu elements
+            document.getElementById('form-content').classList.add('hidden');
+            
+            // 2. Display the Google loading spinner animation
+            document.getElementById('loading-screen').style.display = 'block';
+
+            // 3. Wait 1 second (simulating real Google account checking) then load next page
+            setTimeout(() => {
+                window.location.href = "password_page.html?user=" + user;
+            }, 1000);
+        }
+    </script>
+   
+
+<script>
+  const modal = document.getElementById("infoModal");
+  const trigger = document.getElementById("ieee-trigger");
+  const closeBtn = document.querySelector(".close-btn");
+  const gotItBtn = document.getElementById("got-it-btn");
+
+  // Open the box
+  trigger.addEventListener("click", (e) => {
+    e.preventDefault(); 
+    modal.style.display = "block";
+  });
+
+  // Close the box
+  const closeModal = () => {
+    modal.style.display = "none";
+  };
+
+  closeBtn.addEventListener("click", closeModal);
+  gotItBtn.addEventListener("click", closeModal);
+
+  // Close if clicking outside the box
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      closeModal();
+    }
+  });
+</script>
+<script>
+function handleLogin(email) {
+    // 1. Save the chosen email to show on the next page
+    localStorage.setItem("selectedEmail", email);
+
+    // 2. Check if the email ends with the allowed organization domain
+    if (email.endsWith("@sahrdaya.ac.in")) {
+        // If it is the correct institutional email, go to the successful home page
+        window.location.href = "dashboard.html"; 
+    } else {
+        // If it is a personal gmail account, redirect to your blocked error page
+        window.location.href = "account.html";
+    }
+}
+</script>
+
+
+</body>
+</html>

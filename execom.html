@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IEEE Kidangoor - Execom</title>
+  
+  <!-- Fonts to match the screenshot -->
+  <link rel="preconnect" href="https://googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* Reset & Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #2d3748;
+      padding-bottom: 50px;
+    }
+
+    /* Top Navigation Bar */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      border-bottom: 1px solid #f0f4f8;
+    }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #718096;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .nav-links a.active {
+      color: #0284c7;
+    }
+    .sign-in-btn {
+      text-decoration: none;
+      color: #0284c7;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Main Section Container */
+    .container {
+      max-width: 500px; /* Kept tight to look like the mobile screenshot layout */
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+
+    /* Section Title Badge */
+    .title-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #0f172a;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 25px;
+    }
+    .title-badge svg {
+      width: 20px;
+      height: 20px;
+      color: #0284c7;
+    }
+
+    /* Headings & Descriptions */
+    .main-title {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.2;
+      color: #0f172a;
+      margin-bottom: 15px;
+    }
+    .main-title span {
+      color: #0284c7;
+    }
+    .description {
+      font-size: 14px;
+      color: #718096;
+      line-height: 1.6;
+      font-weight: 400;
+      margin-bottom: 35px;
+    }
+
+    /* Divider Line */
+    hr {
+      border: 0;
+      border-top: 1px solid #edf2f7;
+      margin-bottom: 35px;
+    }
+
+    /* Stats Counter Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .stat-label {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #a0aec0;
+      margin-bottom: 5px;
+    }
+    .stat-number {
+      font-size: 28px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    /* Cards Grid View */
+    .cards-row {
+      display: flex;
+      gap: 15px;
+      overflow-x: auto; /* Allows side scrolling if screens are small */
+    }
+    .profile-card {
+      flex: 0 0 85%; /* Sized to let the next card peek into view like the screenshot */
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f8fafc;
+      position: relative;
+    }
+    .card-label {
+      background: #ffffff;
+      padding: 12px 15px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #718096;
+      border-bottom: 1px solid #edf2f7;
+    }
+    .profile-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="events.html">Events</a>
+      <a href="societies.html">Societies</a>
+      <a href="execom.html" class="active">Execom</a>
+    </div>
+    <a href="signin.html" class="sign-in-btn">Sign In</a>
+  </header>
+
+  <!-- Page Content -->
+  <div class="container">
+    
+    <!-- Header Icon and Label -->
+    <div class="title-badge">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+      </svg>
+      The Execom
+    </div>
+
+    <!-- Main Title Content -->
+    <h1 class="main-title">
+      Meet the people<br>
+      <span>behind the vision.</span>
+    </h1>
+
+    <!-- Subtext -->
+    <p class="description">
+      The executive committee driving innovation, collaboration, and excellence at IEEE Sahrdaya SB.
+    </p>
+
+    <hr>
+
+    <!-- Stats Panel Counter Block -->
+    <div class="stats-grid">
+      <div>
+        <div class="stat-label">Roster</div>
+        <div class="stat-number">80</div>
+      </div>
+      <div>
+        <div class="stat-label">Events Led</div>
+        <div class="stat-number">100+</div>
+      </div>
+      <div>
+        <div class="stat-label">Societies</div>
+        <div class="stat-number">14</div>
+      </div>
+    </div>
+
+    <!-- Team Cards Grid Slider Section -->
+    <div class="cards-row">
+      
+      <!-- Card 1: Branch Counselor -->
+      <div class="profile-card">
+        <div class="card-label">Branch Counselor</div>
+        <!-- Replace this URL with your local image file path later -->
+        <img class="profile-img" src="https://unsplash.com" alt="Counselor">
+      </div>
+
+      <!-- Card 2: Chair (Visible on side-swipe) -->
+      <div class="profile-card">
+        <div class="card-label">Chair</div>
+        <img class="profile-img" src="https://unsplash.com" alt="Chair">
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

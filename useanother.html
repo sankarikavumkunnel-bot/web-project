@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google - Sign in</title>
+    <style>
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            font-family: 'Roboto', arial, sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffffff;
+        }
+        .login-box {
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+        }
+        
+        /* Google Logo Styling */
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .logo span:nth-child(1) { color: #4285F4; }
+        .logo span:nth-child(2) { color: #EA4335; }
+        .logo span:nth-child(3) { color: #FBBC05; }
+        .logo span:nth-child(4) { color: #4285F4; }
+        .logo span:nth-child(5) { color: #34A853; }
+        .logo span:nth-child(6) { color: #EA4335; }
+        
+        h1 {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 8px;
+            color: #202124;
+            text-align: center;
+        }
+        p {
+            font-size: 16px;
+            color: #202124;
+            margin-bottom: 24px;
+            line-height: 1.5;
+            text-align: center;
+        }
+        
+        /* Inputs and Layout */
+        .input-container {
+            position: relative;
+            margin-bottom: 24px;
+        }
+        input {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid #1a73e8;
+            border-radius: 4px;
+            font-size: 16px;
+            outline: none;
+        }
+        .links {
+            text-align: left;
+            margin-bottom: 40px;
+        }
+        .links a, .create-account, .forgot-password {
+            color: #1a73e8;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .links a:hover, .create-account:hover, .forgot-password:hover {
+            text-decoration: underline;
+        }
+        .bottom-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* Buttons */
+        .btn {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #1557b0;
+        }
+
+        /* Email Display Capsule on Password Screen */
+        .user-display {
+            font-size: 14px;
+            color: #202124;
+            border: 1px solid #dadce0;
+            padding: 6px 12px;
+            border-radius: 16px;
+            display: inline-block;
+            margin-bottom: 24px;
+            cursor: pointer;
+        }
+        .user-display:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* Class to toggle visibility */
+        .hidden {
+            display: none !important;
+        }
+        .navbar {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 70px;
+    background: white;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    z-index: 1000;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #666;
+    font-weight: 600;
+    font-size: 16px;
+    transition: 0.3s ease;
+    padding: 10px 18px;
+    border-radius: 20px;
+}
+
+.navbar a:hover {
+    background: #0077b6;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.navbar a.active {
+    background: #0077b6;
+    color: white;
+}
+    </style>
+</head>
+<body>
+     <div class="navbar">
+        <a href="index.html" class="active">HOME</a>
+        <a href="events.html" class="active">EVENTS</a>
+        <a href="societies.html" class="active">SOCIETIES</a>
+        <a href="execom.html" class="active">EXECOM</a>
+        <a href="signin.html" class="active">SIGN IN</a>
+    </div>
+    
+    <div class="login-box">
+        <!-- Google Logo -->
+        <div class="logo">
+            <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
+        </div>
+
+        <form id="loginForm" onsubmit="handleSubmit(event)">
+            
+            <!-- STEP 1: Email Section -->
+            <div id="email-step">
+                <h1>Sign in</h1>
+                <p>Use your Google Account. The account will be added to this device and available to other Google apps.</p>
+                
+                <div class="input-container">
+                    <input type="text" id="email" placeholder="Email or phone" required>
+                </div>
+                
+                <div class="links">
+                    <!-- Redirects to Forgot Email page -->
+                    <a href="findemail.html" target="_blank">Forgot email?</a>
+                </div>
+                
+                <div class="bottom-section">
+                    <!-- Redirects to Create Account page -->
+                    <a href="createaccount.html" target="_blank" class="create-account">Create account</a>
+                    <button type="button" class="btn" onclick="goToPassword()">Next</button>
+                </div>
+            </div>
+
+            <!-- STEP 2: Password Section (Hidden by Default) -->
+            <div id="password-step" class="hidden" style="text-align: center;">
+                <h1>Welcome</h1>
+                
+                <!-- Clicking this capsule takes the user back or to an external account page -->
+                <div id="display-email" class="user-display" onclick="redirectToExternalSite()"></div>
+                
+                <div class="input-container">
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                </div>
+                
+                <div class="bottom-section">
+                    <a href="password.html" target="_blank" class="forgot-password">Forgot password?</a>
+                    <button type="submit" class="btn">Sign in</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <!-- Navigation Logic -->
+    <script>
+        function goToPassword() {
+            const emailInput = document.getElementById('email');
+            
+            if (emailInput.checkValidity()) {
+                // Display the entered email in the capsule box
+                document.getElementById('display-email').innerText = emailInput.value + " ▾";
+                
+                // Show password panel
+                document.getElementById('email-step').classList.add('hidden');
+                document.getElementById('password-step').classList.remove('hidden');
+            } else {
+                emailInput.reportValidity();
+            }
+        }
+
+        // Action when user clicks the final Sign In button
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            // Redirect straight to your target landing site
+            window.location.href = "findemail.html"; 
+        }
+
+        // Action if they click on the email capsule text directly
+        function redirectToExternalSite() {
+            window.location.href = "create3account.html";
+        }
+    </script>
+
+</body>
+</html>
